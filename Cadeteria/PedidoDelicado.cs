@@ -9,7 +9,7 @@ namespace Cadeteria
         public PedidoDelicado(string descripcion) : base(descripcion) { }
         public override double Precio()
         {
-            return PrecioBase * 1.25;
+            return PrecioBase * 1.30;
         }
     }
 }
