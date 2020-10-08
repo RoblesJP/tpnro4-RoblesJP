@@ -63,7 +63,6 @@ namespace Cadeteria
                     }
                 }
             }
-
             return empresaAleatoria;
         }
 
@@ -74,15 +73,16 @@ namespace Cadeteria
             foreach (Cliente miCliente in miEmpresa.ListaDeClientes)
             {
                 foreach (Pedido suPedido in miCliente.ListaDePedidosRealizados)
-                {
+                { 
+                    Console.WriteLine(" > PEDIDO {0}: {1}", suPedido.Nro, suPedido.Descripcion);
+                    Console.WriteLine("\t[{0}]", suPedido.GetType().Name);
+                    Console.WriteLine("\t[{0}]", suPedido.Estado);
+                    Console.WriteLine("\t[Realizado por cliente ID{0}]", miCliente.Id);
                     if (suPedido.Estado == Estado.Entregado)
                     {
                         Cadete cadeteQueEntregoElPedido = miEmpresa.ListaDeCadetes.Find(x => x.ListaDePedidos.Exists(y => y.Nro == suPedido.Nro));
-                        Console.WriteLine(" > PEDIDO {0}: {1} \n\t[{6}] \n\t[{2}] \n\t[Monto: ${3}] \n\t[Realizado por cliente ID{4}] \n\t[Entregado por cadete ID{5}]", suPedido.Nro, suPedido.Descripcion, suPedido.Estado, suPedido.Precio(), miCliente.Id, cadeteQueEntregoElPedido.Id, suPedido.GetType().Name);
-                    }
-                    else
-                    {
-                        Console.WriteLine(" > PEDIDO {0}: {1} \n\t[{4}] \n\t[{2}] \n\t[Realizado por cliente ID{3}]", suPedido.Nro, suPedido.Descripcion, suPedido.Estado, miCliente.Id, suPedido.GetType().Name);
+                        Console.WriteLine("\t[Entregado por cadete ID{0}]", cadeteQueEntregoElPedido.Id);
+                        Console.WriteLine("\t[Monto: ${0}]", suPedido.Precio());
                     }
                     Console.WriteLine();
                 }
