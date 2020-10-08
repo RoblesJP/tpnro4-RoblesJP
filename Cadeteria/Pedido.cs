@@ -1,32 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Cadeteria
 {
     public enum Estado
     {
         Pendiente,
+        Asignado,
         Entregado
     }
+
+    public enum Tipo
+    {
+        Express,
+        Delicado,
+        Ecologico
+    }
+
     public class Pedido
     {
+        // atributos
+        protected static double PrecioBase = 150;
         private int nro;
         private string descripcion;
-        Cliente cliente;
         Estado estado;
 
+        // propiedades
         public int Nro { get => nro; set => nro = value; }
         public string Descripcion { get => descripcion; set => descripcion = value; }
-        public Cliente Cliente { get => cliente; set => cliente = value; }
         public Estado Estado { get => estado; set => estado = value; }
-
-        public Pedido(string descripcion, string nombreDeCliente, string direccionDeCliente, long telefonoDeCliente)
+        
+        // constructor
+        public Pedido(string descripcion)
         {
             Nro = new Random().Next(1000, 10000);
             Descripcion = descripcion;
-            Cliente = new Cliente(nombreDeCliente, direccionDeCliente, telefonoDeCliente);
             Estado = Estado.Pendiente;
         }
+
+        // métodos
+        public virtual double Precio() { return 0; }
     }
 }
