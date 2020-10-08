@@ -7,7 +7,7 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            Empresa miCadeteria1 = Helper.GenerarEmpresaAleatoria(5, 5);
+            Empresa miCadeteria1 = Helper.GenerarEmpresaAleatoria(3, 3, 10);
             Helper.InformeDeEmpresa(miCadeteria1);
         }
     }
