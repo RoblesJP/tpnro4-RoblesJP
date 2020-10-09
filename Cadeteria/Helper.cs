@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using System.Text;
@@ -7,6 +8,7 @@ namespace Cadeteria
 {
     public class Helper
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private static readonly string[] NombresClientes = { "Juan", "Pedro", "Maria", "Carlos", "Aracely", "Claudio" };
         private static readonly string[] NombresCadetes = { "Gustavo", "Ramiro", "Luciana", "Paula", "Fernando", "Nelson" };
 
@@ -36,11 +38,11 @@ namespace Cadeteria
             for (int i = 0; i < cantidadDePedidos; i++)
             {
                 // un cliente aleatorio realiza un pedido
-                empresaAleatoria.ListaDeClientes[rnd.Next(0, empresaAleatoria.ListaDeClientes.Count)].RealizarPedido((Tipo)rnd.Next(0, Enum.GetNames(typeof(Tipo)).Length),"Un pedido cualquiera");
+                empresaAleatoria.ListaDeClientes[rnd.Next(0, empresaAleatoria.ListaDeClientes.Count)].RealizarPedido((Tipo)rnd.Next(0, Enum.GetNames(typeof(Tipo)).Length),"Un pedido cualquiera", rnd.Next(0, 2) == 1);
             }
 
             // asignar pedidos a cadetes
-            for (int i = 0; i < rnd.Next(cantidadDePedidos/2, cantidadDePedidos + 1); i++)
+            for (int i = 0; i < cantidadDePedidos; i++)
             {
                 Cadete miCadete = null;
                 Cliente miCliente = null;
@@ -48,7 +50,15 @@ namespace Cadeteria
                 miCadete = empresaAleatoria.ListaDeCadetes[rnd.Next(0, empresaAleatoria.ListaDeCadetes.Count)];
                 miCliente = empresaAleatoria.ListaDeClientes.Find(x => x.ListaDePedidosRealizados.Exists(y => y.Estado == Estado.Pendiente));
                 suPedido = miCliente.ListaDePedidosRealizados.Find(x => x.Estado == Estado.Pendiente);
-                miCadete.TomarPedido(suPedido);
+                try 
+                {
+                    miCadete.TomarPedido(suPedido);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    Logger.Error(ex);
+                }
+                
             }
 
             // entregar pedidos
@@ -77,12 +87,12 @@ namespace Cadeteria
                     Console.WriteLine(" > PEDIDO {0}: {1}", suPedido.Nro, suPedido.Descripcion);
                     Console.WriteLine("\t[{0}]", suPedido.GetType().Name);
                     Console.WriteLine("\t[{0}]", suPedido.Estado);
-                    Console.WriteLine("\t[Realizado por cliente ID{0}]", miCliente.Id);
+                    Console.WriteLine("\t[Realizado por cliente ID{0}][Cupon: {1}]", miCliente.Id, suPedido.TieneCuponDeDescuento);
                     if (suPedido.Estado == Estado.Entregado)
                     {
                         Cadete cadeteQueEntregoElPedido = miEmpresa.ListaDeCadetes.Find(x => x.ListaDePedidos.Exists(y => y.Nro == suPedido.Nro));
                         Console.WriteLine("\t[Entregado por cadete ID{0}]", cadeteQueEntregoElPedido.Id);
-                        Console.WriteLine("\t[Monto: ${0}]", suPedido.Precio());
+                        Console.WriteLine("\t[Monto: ${0}]", suPedido.Precio);
                     }
                     Console.WriteLine();
                 }
