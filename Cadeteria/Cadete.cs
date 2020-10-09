@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 
 namespace Cadeteria
 {
@@ -32,8 +33,17 @@ namespace Cadeteria
         // métodos
         public void TomarPedido(Pedido pedido)
         {
-            ListaDePedidos.Add(pedido);
-            pedido.Estado = Estado.Asignado;
+            if ((pedido.GetType().Name.ToString() == Tipo.PedidoExpress.ToString() && this.Vehiculo != Vehiculo.Moto)
+               || (pedido.GetType().Name.ToString() == Tipo.PedidoDelicado.ToString() && this.Vehiculo != Vehiculo.Auto)
+               || (pedido.GetType().Name.ToString() == Tipo.PedidoEcologico.ToString() && this.Vehiculo != Vehiculo.Bicicleta))
+            {
+                throw new InvalidOperationException($"El cadete ID{this.Id} no posee un vehiculo adecuado para entregar el pedido {pedido.Nro}");
+            }
+            else 
+            {
+                ListaDePedidos.Add(pedido);
+                pedido.Estado = Estado.Asignado;
+            } 
         }
 
         public double Jornal()
