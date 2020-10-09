@@ -6,10 +6,22 @@ namespace Cadeteria
 {
     class PedidoExpress : Pedido
     {
-        public PedidoExpress(string descripcion) : base(descripcion) { }
-        public override double Precio()
+        // propiedades
+        public override double Precio
         {
-            return PrecioBase * 1.25;
+            get
+            {
+                double precioFinal = PrecioBase * 1.25;
+                if (TieneCuponDeDescuento)
+                {
+                    precioFinal *= 0.90;
+                }
+                return precioFinal;
+            }
+
         }
+
+        // constructor
+        public PedidoExpress(string descripcion, bool tieneCuponDeDescuento) : base(descripcion, tieneCuponDeDescuento) { }
     }
 }

@@ -6,10 +6,22 @@ namespace Cadeteria
 {
     public class PedidoEcologico : Pedido
     {
-        public PedidoEcologico(string descripcion) : base(descripcion) { }
-        public override double Precio()
+        // propiedades
+        public override double Precio
         {
-            return PrecioBase;
+            get
+            {
+                double precioFinal = PrecioBase;
+                if (TieneCuponDeDescuento)
+                {
+                    precioFinal *= 0.90;
+                }
+                return precioFinal;
+            }
+
         }
+
+        // constructor
+        public PedidoEcologico(string descripcion, bool tieneCuponDeDescuento) : base(descripcion, tieneCuponDeDescuento) { }
     }
 }
