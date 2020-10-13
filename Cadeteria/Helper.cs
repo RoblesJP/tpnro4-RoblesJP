@@ -44,21 +44,23 @@ namespace Cadeteria
             // asignar pedidos a cadetes
             for (int i = 0; i < cantidadDePedidos; i++)
             {
-                Cadete miCadete = null;
                 Cliente miCliente = null;
                 Pedido suPedido = null;
-                miCadete = empresaAleatoria.ListaDeCadetes[rnd.Next(0, empresaAleatoria.ListaDeCadetes.Count)];
                 miCliente = empresaAleatoria.ListaDeClientes.Find(x => x.ListaDePedidosRealizados.Exists(y => y.Estado == Estado.Pendiente));
                 suPedido = miCliente.ListaDePedidosRealizados.Find(x => x.Estado == Estado.Pendiente);
-                try 
+                foreach(Cadete miCadete in empresaAleatoria.ListaDeCadetes)
                 {
-                    miCadete.TomarPedido(suPedido);
+                    try
+                    {
+                        miCadete.TomarPedido(suPedido);
+                        break;
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        Logger.Error(ex);
+                        continue;
+                    }
                 }
-                catch (InvalidOperationException ex)
-                {
-                    Logger.Error(ex);
-                }
-                
             }
 
             // entregar pedidos
@@ -101,17 +103,19 @@ namespace Cadeteria
             Console.WriteLine("-- Lista de cadetes --");
             foreach (Cadete miCadete in miEmpresa.ListaDeCadetes)
             {
-                Console.WriteLine(" > CADETE ID{0}: {1} | Vehiculo: {2} | Pedidos entregados: {3} | Jornal: {4}", miCadete.Id, miCadete.Nombre, miCadete.Vehiculo, miCadete.CantidadDePedidosEntregados(), miCadete.Jornal());
+                Console.WriteLine(" > CADETE ID{0}: {1} | Vehiculo: {2} | Pedidos asignados: {5} | Pedidos entregados: {3} | Promedio: {6:0.##}% |  Jornal: ${4}", 
+                    miCadete.Id, miCadete.Nombre, miCadete.Vehiculo, miCadete.CantidadDePedidosEntregados(), miCadete.Jornal(), miCadete.CantidadDePedidos(), miCadete.PromedioDePedidosEntregados()*100);
             }
             Cadete cadeteConMasPedidosEntregados = miEmpresa.CadeteConMasPedidosEntregados();
             Console.WriteLine();
-            Console.WriteLine("Cadete con mas pedidos entregados: Cadete {0} - {1} con {2} pedidos entregados", cadeteConMasPedidosEntregados.Id, cadeteConMasPedidosEntregados.Nombre, cadeteConMasPedidosEntregados.CantidadDePedidosEntregados());
+            Console.WriteLine("Cadete con mas pedidos entregados: Cadete {0} - {1} con {2} pedidos entregados", 
+                cadeteConMasPedidosEntregados.Id, cadeteConMasPedidosEntregados.Nombre, cadeteConMasPedidosEntregados.CantidadDePedidosEntregados());
 
             Console.WriteLine();
             Console.WriteLine("-- Lista de clientes --");
             foreach (Cliente miCliente in miEmpresa.ListaDeClientes)
             {
-                Console.WriteLine(" > CLIENTE ID{0}: {1} | Pedidos realizados: {2}", miCliente.Id, miCliente.Nombre, miCliente.CantidadDePedidosRealizados());
+                Console.WriteLine(" > CLIENTE ID{0}: {1} | Pedidos realizados: {2}", miCliente.Id, miCliente.Nombre, miCliente.CantidadDePedidos());
             }
         }
     }
