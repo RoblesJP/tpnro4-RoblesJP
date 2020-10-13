@@ -21,7 +21,7 @@ namespace Cadeteria
         }
 
         // métodos
-        public int CantidadDePedidosRealizados()
+        public override int CantidadDePedidos()
         {
             return ListaDePedidosRealizados.Count;
         }

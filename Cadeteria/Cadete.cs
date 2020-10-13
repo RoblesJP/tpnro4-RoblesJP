@@ -49,8 +49,7 @@ namespace Cadeteria
         public double Jornal()
         {
             double jornal = 0;
-            int cantidadDePedidosEnregados = (ListaDePedidos.Where(pedido => pedido.Estado == Estado.Entregado)).Count();
-            jornal = cantidadDePedidosEnregados * 100;
+            jornal = CantidadDePedidosEntregados() * 100;
             switch(this.Vehiculo)
             {
                 case Vehiculo.Bicicleta:
@@ -64,6 +63,11 @@ namespace Cadeteria
                     break;
             }
             return jornal;
+        }
+
+        public override int CantidadDePedidos()
+        {
+            return ListaDePedidos.Count;
         }
 
         public int CantidadDePedidosEntregados()
