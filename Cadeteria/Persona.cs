@@ -25,5 +25,8 @@ namespace Cadeteria
             Direccion = direccion;
             Telefono = telefono;
         }
+
+        // métodos
+        public virtual int CantidadDePedidos() { return 0; }
     }
 }
