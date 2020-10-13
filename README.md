@@ -6,78 +6,80 @@ Output example:
 ```
 ####### UNA EMPRESA DE MENTIRA #######
 -- Lista de pedidos --
- > PEDIDO 5379: Un pedido cualquiera
+ > PEDIDO 1628: Un pedido cualquiera
         [PedidoEcologico]
-        [Asignado]
-        [Realizado por cliente ID1]
-
- > PEDIDO 4458: Un pedido cualquiera
-        [PedidoExpress]
         [Entregado]
-        [Monto: $187.5]
-        [Realizado por cliente ID1]
+        [Realizado por cliente ID1][Cupon: False]
         [Entregado por cadete ID1]
-
- > PEDIDO 7726: Un pedido cualquiera
-        [PedidoEcologico]
-        [Entregado]
         [Monto: $150]
-        [Realizado por cliente ID2]
+
+ > PEDIDO 1602: Un pedido cualquiera
+        [PedidoExpress]
+        [Asignado]
+        [Realizado por cliente ID1][Cupon: True]
+
+ > PEDIDO 1862: Un pedido cualquiera
+        [PedidoDelicado]
+        [Entregado]
+        [Realizado por cliente ID2][Cupon: False]
         [Entregado por cadete ID3]
-
- > PEDIDO 7958: Un pedido cualquiera
-        [PedidoDelicado]
-        [Entregado]
         [Monto: $195]
-        [Realizado por cliente ID2]
-        [Entregado por cadete ID2]
 
- > PEDIDO 7154: Un pedido cualquiera
-        [PedidoExpress]
+ > PEDIDO 9803: Un pedido cualquiera
+        [PedidoEcologico]
         [Entregado]
-        [Monto: $187.5]
-        [Realizado por cliente ID2]
+        [Realizado por cliente ID2][Cupon: True]
         [Entregado por cadete ID1]
+        [Monto: $135]
 
- > PEDIDO 1279: Un pedido cualquiera
+ > PEDIDO 2854: Un pedido cualquiera
         [PedidoExpress]
-        [Entregado]
-        [Monto: $187.5]
-        [Realizado por cliente ID2]
-        [Entregado por cadete ID1]
+        [Asignado]
+        [Realizado por cliente ID2][Cupon: False]
 
- > PEDIDO 6240: Un pedido cualquiera
+ > PEDIDO 2574: Un pedido cualquiera
         [PedidoDelicado]
-        [Pendiente]
-        [Realizado por cliente ID3]
+        [Entregado]
+        [Realizado por cliente ID2][Cupon: True]
+        [Entregado por cadete ID3]
+        [Monto: $175.5]
 
- > PEDIDO 3212: Un pedido cualquiera
+ > PEDIDO 9319: Un pedido cualquiera
+        [PedidoDelicado]
+        [Entregado]
+        [Realizado por cliente ID3][Cupon: True]
+        [Entregado por cadete ID3]
+        [Monto: $175.5]
+
+ > PEDIDO 5976: Un pedido cualquiera
         [PedidoExpress]
-        [Pendiente]
-        [Realizado por cliente ID3]
+        [Entregado]
+        [Realizado por cliente ID3][Cupon: False]
+        [Entregado por cadete ID2]
+        [Monto: $187.5]
 
- > PEDIDO 6102: Un pedido cualquiera
-        [PedidoEcologico]
-        [Pendiente]
-        [Realizado por cliente ID3]
+ > PEDIDO 1030: Un pedido cualquiera
+        [PedidoDelicado]
+        [Asignado]
+        [Realizado por cliente ID3][Cupon: True]
 
- > PEDIDO 2536: Un pedido cualquiera
-        [PedidoEcologico]
-        [Pendiente]
-        [Realizado por cliente ID3]
+ > PEDIDO 5233: Un pedido cualquiera
+        [PedidoDelicado]
+        [Asignado]
+        [Realizado por cliente ID3][Cupon: True]
 
 
 -- Lista de cadetes --
- > CADETE ID1: Gustavo | Vehiculo: Auto | Pedidos entregados: 3 | Jornal: 375
- > CADETE ID2: Fernando | Vehiculo: Auto | Pedidos entregados: 1 | Jornal: 125
- > CADETE ID3: Fernando | Vehiculo: Auto | Pedidos entregados: 1 | Jornal: 125
+ > CADETE ID1: Paula | Vehiculo: Bicicleta | Pedidos asignados: 2 | Pedidos entregados: 2 | Promedio: 100% |  Jornal: $210
+ > CADETE ID2: Luciana | Vehiculo: Moto | Pedidos asignados: 3 | Pedidos entregados: 1 | Promedio: 33.33% |  Jornal: $120
+ > CADETE ID3: Gustavo | Vehiculo: Auto | Pedidos asignados: 5 | Pedidos entregados: 3 | Promedio: 60% |  Jornal: $375
 
-Cadete con mas pedidos entregados: Cadete 1 - Gustavo con 3 pedidos entregados
+Cadete con mas pedidos entregados: Cadete 3 - Gustavo con 3 pedidos entregados
 
 -- Lista de clientes --
- > CLIENTE ID1: Maria | Pedidos realizados: 2
- > CLIENTE ID2: Juan | Pedidos realizados: 4
- > CLIENTE ID3: Juan | Pedidos realizados: 4
+ > CLIENTE ID1: Aracely | Pedidos realizados: 2
+ > CLIENTE ID2: Pedro | Pedidos realizados: 4
+ > CLIENTE ID3: Pedro | Pedidos realizados: 4
  ```
  
 tpnro4-RoblesJP created by GitHub Classroom
